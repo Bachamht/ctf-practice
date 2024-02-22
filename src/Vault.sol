@@ -63,13 +63,12 @@ contract Vault {
   }
 
   function withdraw() public {
-
+    require(canWithdraw == true, "Not owner");
     if(deposites[msg.sender] >= 0) {
       (bool result,) = msg.sender.call{value: deposites[msg.sender]}("");
       if(result) {
         deposites[msg.sender] = 0;
       }
-      
     }
 
   }
